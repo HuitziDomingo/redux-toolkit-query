@@ -1,7 +1,9 @@
+import  TaskList  from './components/TaskList'
+
 const App = () => {
   return (
     <div>
-      App      
+      <TaskList />
     </div>
   )
 }
