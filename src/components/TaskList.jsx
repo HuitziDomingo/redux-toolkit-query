@@ -1,8 +1,10 @@
-import { useGetTasksQuery } from '../api/apiSlice'
+import { useGetTasksQuery, useDeleteTaskMutation } from '../api/apiSlice'
 
 const TaskList = () => {
 
     const { data, isError, isLoading, error } = useGetTasksQuery()
+
+    const [deleteTask] = useDeleteTaskMutation()
 
     if (isLoading) return <div>cargando...</div>
     else if (isError) return <div>Error {error} </div>
@@ -17,9 +19,11 @@ const TaskList = () => {
                     <li key={task.id}>
                         <h3>{task.name}</h3>
                         <p>{task.description}</p>
-                        <button>Borrar</button>
+                        <button onClick={
+                            () => deleteTask(task.id)
+                        }>Borrar</button>
                         <input type="checkbox" id={task.id} />
-                        <label htmlFor={ task.id} >Completada</label>
+                        <label htmlFor={task.id} >Completada</label>
                     </li>
                 ))
             }
